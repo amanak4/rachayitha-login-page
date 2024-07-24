@@ -26,7 +26,7 @@
 @media screen and (max-width: 768px) {
     .wrapper {
         width: 80vw;
-        height: 65vh;
+        height: 55vh;
     }
 }
 
@@ -194,8 +194,7 @@ h2 {
 .btn {
     position: relative;
     top: 0;
-    left: 4vw;
-    
+    left: 4vw; 
     width: 80%;
     height: 40px;
     background: #b01ee9;
