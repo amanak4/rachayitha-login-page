@@ -25,62 +25,80 @@ const Login = () => {
         setPasswordMatch(confirmPassword === password);
     };
 
-    const onSubmitLogin = async (data) => {
-        try {
-            const response = await axios.post('https://api.rachayitha.com/api/v1/login/', {
-                user: {
-                    email: data.email,
-                    password: data.password
-                }
-            }, {
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': undefined
-                }
-            });
-   console.log(response);
-            if (response.data.user.is_active) {
-                toast.success(`Login successful: ${response.data.user.username}`);
-                window.location.replace("/");
-            } else {
-                toast.error(`Login failed: ${response}`);
-            }
-        } catch (error) {
-            console.log(error);
-            toast.error(`Login failed: ${error.response.data.errors.email}`);
-        }
-    };
 
-    const onSubmitSignup = async (data) => {
-        try {
-            const response = await axios.post('https://api.rachayitha.com/api/v1/register/', {
-                user: {
-                    username: data.username,
-                    email: data.email,
-                    password: data.password,
-                    bio: data.bio,
-                    full_name: data.fullName,
-                    birth_date: moment(data.birthDate).format('YYYY-MM-DD'),
-                    gender: data.gender
-                }
-            }, {
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': undefined
-                }
-            });
 
-               console.log(response);
-            if (!response.data.user.is_active) {
-                setShowVerificationCard(true);
-            } else {
-                toast.error(`Signup failed: ${response.data.error}`);
+const onSubmitLogin = async (data) => {
+    try {
+        const response = await axios.post('https://api.rachayitha.com/api/v1/login/', {
+            user: {
+                email: data.email,
+                password: data.password
             }
-        } catch (error) {
-            console.log(error);
-            toast.error(`Signup failed: ${error.response.data.errors.email}`);
+        }, {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': undefined
+            }
+        });
+        console.log(response);
+        if (response.data.user.is_active) {
+            toast.success(`Login successful: ${response.data.user.username}`);
+            window.location.replace("/");
+        } else {
+            toast.error(`Login failed: ${response.data.msg}`);
         }
-    };
+    } catch (error) {
+        console.log(error);
+        if (error.response && error.response.data && error.response.data.user.msg) {
+            toast.error(`Login failed: ${error.response.data.user.msg}`);
+        }
+        else if(error.response && error.response.data && error.response.data.user.error){
+            toast.error(`Login failed: ${error.response.data.user.error}`);
+        }
+         else {
+            toast.error('Login failed: An unexpected error occurred.');
+        }
+    }
+};
+
+const onSubmitSignup = async (data) => {
+    try {
+        const response = await axios.post('https://api.rachayitha.com/api/v1/register/', {
+            user: {
+                username: data.username,
+                email: data.email,
+                password: data.password,
+                bio: data.bio,
+                full_name: data.fullName,
+                birth_date: moment(data.birthDate).format('YYYY-MM-DD'),
+                gender: data.gender
+            }
+        }, {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': undefined
+            }
+        });
+
+        console.log(response);
+        if (!response.data.user.is_active) {
+            setShowVerificationCard(true);
+        } else {
+            toast.error(`Signup failed: ${response.data.error}`);
+        }
+    } catch (error) {
+        console.log(error);
+        if (error.response && error.response.data && error.response.data.errors) {
+            const errors = error.response.data.errors;
+            const firstErrorKey = Object.keys(errors)[0];
+            const firstErrorMessage = errors[firstErrorKey][0];
+            toast.error(`Signup failed: ${firstErrorMessage}`);
+        } else {
+            toast.error('Signup failed: An unexpected error occurred.');
+        }
+    }
+};
+
 
     const resendEmail = async () => {
         try {
@@ -94,7 +112,7 @@ const Login = () => {
             });
             toast.success('Verification email resent successfully.');
         } catch (error) {
-            toast.error(`Error resending verification email: ${error.response ? error.response.data.message : error.message}`);
+            toast.error(`Error resending verification email: ${ error.response.data.user.msg}`);
         }
     };
 
@@ -114,7 +132,7 @@ const Login = () => {
                 toast.info('Email not verified yet.');
             }
         } catch (error) {
-            toast.error(`Error checking verification status: ${error.response ? error.response.data.message : error.message}`);
+            toast.error(`Error checking verification status: ${error.response.data.user.msg}`);
         }
     };
 
