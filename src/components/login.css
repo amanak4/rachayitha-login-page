@@ -333,13 +333,11 @@ h2 {
     left: 0;
     width: 100%;
     height: 100%;
-    padding: 0 10px;
-    background: url(../assets/loginbg10.jpg) no-repeat;
+    padding: 0;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     pointer-events: none;
-    /* color: #1104a1ab; */
 }
 
 

@@ -7,7 +7,8 @@ import { useForm, Controller } from 'react-hook-form';
 import { TextField, Button, Box, Typography, Card, CardContent, FormControl, FormLabel, RadioGroup, FormControlLabel, Radio, IconButton } from '@mui/material'; // Import Material-UI components
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
-import logo from "../assets/rachayitha_logo_500.svg"
+import logo from "../assets/rachayitha_logo_500.svg";
+import img from "../assets/loginbg10.jpg";
 const Login = () => {
     const { control, handleSubmit, getValues, setValue, watch, formState: { errors } } = useForm();
     const [page, setPage] = useState(0);
@@ -156,7 +157,7 @@ const onSubmitSignup = async (data) => {
 
     return (
         <div className="login-page">
-        <div className="left-side"></div>
+            <img src={img} alt="logo" className="left-side"/>
         <div className='right-side'>
             <div className="wrapper">
                 {showVerificationCard && (
