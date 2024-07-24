@@ -1,0 +1,349 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+
+.login-page {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    justify-content: right;
+    align-items: center;
+    min-height: 100vh;
+    /* background: linear-gradient(#2196f3, #e91e63); */
+    overflow: hidden;
+    /* background:url('../assets/img3.jpeg') no-repeat; */
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+.wrapper {
+    position: relative;
+    width: 30vw;
+    height: 80vh;
+}
+
+@media screen and (max-width: 768px) {
+    .wrapper {
+        width: 80vw;
+        height: 65vh;
+    }
+}
+
+.form-wrapper {
+    position: absolute;
+    top: 0;
+    right: 10vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    background:#fff;
+    background-size: cover;
+    background-position: center;
+    border-radius: 20px;
+    padding: 25px;
+    /* mix-blend-mode: overlay; */
+    box-shadow: 0 0 10px rgba(0, 0, 0, .2);
+}
+
+.wrapper.animate-signUp .form-wrapper.sign-in {
+    transform: rotate(7deg);
+    animation: animateRotate .7s ease-in-out forwards;
+    animation-delay: .3s;
+}
+
+.wrapper.animate-signIn .form-wrapper.sign-in {
+    animation: animateSignIn 1.5s ease-in-out forwards;
+}
+
+.wrapper.animate-forgotPassword .form-wrapper.forgot-password {
+    transform: rotate(deg);
+    animation: animatefRotate .7s ease-in-out forwards;
+    animation-delay: .3s;
+}
+
+@keyframes animateSignIn {
+    0% {
+        transform: translateX(0);
+    }
+
+    50% {
+        transform: translateX(-500px);
+    }
+
+    100% {
+        transform: translateX(0) rotate(7deg);
+    }
+}
+
+.wrapper .form-wrapper.sign-up {
+    transform: rotate(7deg);
+}
+
+.wrapper .form-wrapper.forgot-password {
+    transform: rotate(7deg);
+    z-index: -1;
+}
+
+.wrapper.animate-signIn .form-wrapper.sign-up {
+    animation: animateRotate .7s ease-in forwards;
+    animation-delay: .3s;
+}
+
+@keyframes animateRotate {
+    0% {
+        transform: rotate(7deg);
+    }
+    100% {
+        transform: rotate(0);
+        z-index: 1;
+    }
+}
+
+@keyframes animatefRotate {
+    0% {
+        transform: rotate(7deg);
+    }
+    50%{
+        transform:translateX(500px);
+    } 
+    100% {
+        transform: rotate(0) translateX(0);
+        z-index: 1;
+    }
+}
+
+.wrapper.animate-signUp .form-wrapper.sign-up {
+    animation: animateSignUp 1.5s ease-in-out forwards;
+}
+
+@keyframes animateSignUp {
+    0% {
+        transform: translateX(0);
+        z-index: 1;
+    }
+
+    50% {
+        transform: translateX(500px);
+    }
+
+    100% {
+        transform: translateX(0) rotate(7deg);
+    }
+}
+
+h2 {
+    font-size: 30px;
+    color: #555;
+    text-align: center;
+}
+
+.input-group {
+    position: relative;
+    width: 320px;
+    margin: 30px 0;
+}
+
+.input-group label {
+    position: absolute;
+    top: 50%;
+    left: 5px;
+    transform: translateY(-50%);
+    font-size: 16px;
+    color: #333;
+    padding: 0 5px;
+    pointer-events: none;
+    transition: .5s;
+}
+
+.input-group input {
+    width: 100%;
+    height: 40px;
+    font-size: 16px;
+    color: #333;
+    padding: 0 10px;
+    background: transparent;
+    border: 1px solid #333;
+    outline: none;
+    border-radius: 5px;
+}
+
+.input-group input:focus~label,
+.input-group input:valid~label {
+    top: 0;
+    font-size: 12px;
+    background: #fff;
+}
+
+.forgot-pass {
+    margin: -15px 0 15px;
+}
+
+.forgot-pass a {
+    color: #333;
+    font-size: 14px;
+    text-decoration: none;
+}
+
+.forgot-pass a:hover {
+    text-decoration: underline;
+}
+
+.btn {
+    position: relative;
+    top: 0;
+    left: 4vw;
+    
+    width: 80%;
+    height: 40px;
+    background: #b01ee9;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, .4);
+    font-size: 16px;
+    color: #fff;
+    font-weight: 500;
+    cursor: pointer;
+    border-radius: 20px;
+    border: none;
+    outline: none;
+    margin:2rem;
+}
+
+.sign-link {
+    font-size: 0.8rem;
+    text-align: center;
+    margin:  0;
+}
+
+.sign-link p {
+    color: #333;
+}
+
+.sign-link p a {
+    color: #e91e63;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.sign-link p a:hover {
+    text-decoration: underline;
+}
+
+
+/* Styles for the verification card */
+.verification-card {
+    position: absolute;
+    top: 35%;
+    left: -50%;
+    transform: translate(-50%, -50%);
+    width: 210%;
+    height: 60%;
+    /* max-width: 600px; */
+    padding: 20px;
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    z-index: 1000;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+.verification-card h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.verification-card p {
+    font-size: 16px;
+    margin-bottom: 20px;
+    color: #666;
+}
+
+.verification-card .btn {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.verification-card .btn:hover {
+    background-color: #0056b3;
+}
+
+.verification-card .btn:disabled {
+    background-color: #c0c0c0;
+    cursor: not-allowed;
+}
+
+.verification-card .btn + .btn {
+    background-color: #28a745;
+}
+
+.verification-card .btn + .btn:hover {
+    background-color: #218838;
+}
+
+/* Styles for blurring background */
+.blurred-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
+    z-index: 500;
+    pointer-events: none; /* Allows clicks to pass through */
+    transition: opacity 0.5s ease-in-out;
+}
+
+/* Fade-in animation for the card */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -45%);
+    }
+    to {
+        opacity: 1;
+        transform: translate(-50%, -50%);
+    }
+}
+
+
+.underline {
+    text-decoration: underline;
+    cursor: pointer;
+    color: #333;
+    margin:1rem;
+    padding-top:1rem ;
+}
+
+
+/*-----------left and right panel------------------*/
+.left-side{
+    z-index: -1;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: 0 10px;
+    background: url(../assets/loginbg10.jpg) no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    pointer-events: none;
+    /* color: #1104a1ab; */
+}
+
+
+.logo{
+    width:20vw;
+}
