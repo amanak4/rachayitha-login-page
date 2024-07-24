@@ -28,43 +28,44 @@ const Login = () => {
 
 
 
-const onSubmitLogin = async (data) => {
-    try {
-        const response = await axios.post('https://api.rachayitha.com/api/v1/login/', {
-            user: {
-                email: data.email,
-                password: data.password
+    const onSubmitLogin = async (data) => {
+        try {
+            const response = await axios.post('/api/login/', {
+                user: {
+                    email: data.email,
+                    password: data.password
+                }
+            }, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': undefined
+                }
+            });
+            console.log(response);
+            if (response.data.user.is_active) {
+                toast.success(`Login successful: ${response.data.user.username}`);
+                window.location.replace("/");
+            } else {
+                toast.error(`Login failed: ${response.data.msg}`);
             }
-        }, {
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': undefined
+        } catch (error) {
+            console.log(error);
+            if (error.response && error.response.data && error.response.data.user.msg) {
+                toast.error(`Login failed: ${error.response.data.user.msg}`);
             }
-        });
-        console.log(response);
-        if (response.data.user.is_active) {
-            toast.success(`Login successful: ${response.data.user.username}`);
-            window.location.replace("/");
-        } else {
-            toast.error(`Login failed: ${response.data.msg}`);
+            else if(error.response && error.response.data && error.response.data.user.error){
+                toast.error(`Login failed: ${error.response.data.user.error}`);
+            }
+             else {
+                toast.error('Login failed: An unexpected error occurred.');
+            }
         }
-    } catch (error) {
-        console.log(error);
-        if (error.response && error.response.data && error.response.data.user.msg) {
-            toast.error(`Login failed: ${error.response.data.user.msg}`);
-        }
-        else if(error.response && error.response.data && error.response.data.user.error){
-            toast.error(`Login failed: ${error.response.data.user.error}`);
-        }
-         else {
-            toast.error('Login failed: An unexpected error occurred.');
-        }
-    }
-};
+    };
+    
 
 const onSubmitSignup = async (data) => {
     try {
-        const response = await axios.post('https://api.rachayitha.com/api/v1/register/', {
+        const response = await axios.post('/api/register/', {
             user: {
                 username: data.username,
                 email: data.email,
